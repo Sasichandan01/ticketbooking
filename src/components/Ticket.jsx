@@ -197,12 +197,12 @@ function Ticket() {
                 <MDBModalBody>
                   {trailer !== null && (
                     <ul className="ulvideo">
-                      {trailer.map((data) => (
+                      {trailer.filter(data => data.name.includes('Trailer')).map(data1 => ((
                         <div className="videodata">
-                          <li>{data.name}</li>
+                          <li>{data1.name}</li>
                           <a
                             target="_blank"
-                            href={`https://www.youtube.com/watch/${data.key}`}
+                            href={`https://www.youtube.com/watch/${data1.key}`}
                           >
                             <button className="videodatabutton" >
                               <i
@@ -212,7 +212,8 @@ function Ticket() {
                             </button>
                           </a>
                         </div>
-                      ))}
+                      )))}
+                  
                     </ul>
                   )}
                 </MDBModalBody>
