@@ -50,7 +50,11 @@ function Ticket() {
     { name: "IMAX" },
   ];
 
-  var costs = [{ cost: "200" }, { cost: "150" }, { cost: "100" }];
+  var costs = [
+    { cost: "200", value: "200 -Reclinear" },
+    { cost: "150", value: "150 -Balcony" },
+    { cost: "100", value: "100 -Normal" },
+  ];
 
   const [movie, setmovieData] = useState([]);
   const [cost, setCost] = useState(null);
@@ -76,7 +80,7 @@ function Ticket() {
 
   useEffect(() => {
     fetch(
-      `https://www.omdbapi.com/?t=${title}&y=${year}&plot=full&apikey=961ea94b`
+      `https://www.omdbapi.com/?t=${title}&y=2023&plot=full&apikey=961ea94b`
     )
       .then((res) => res.json())
       .then((data) => setmovieData(data))
@@ -143,7 +147,11 @@ function Ticket() {
   var imdb = movie.imdbRating === "N/A" ? num3 : movie.imdbRating;
   var num1 = parseInt(num);
   num1 = num1 / 1000;
-  num1 = Math.floor(num1);
+  num1 = Math.ceil(num1);
+  var num2 = parseInt(mvedata.vote_count);
+ 
+  num2=num2/1000;
+  num2 = Math.ceil(num2);
   var t = parseInt(movie.Runtime);
   var h = Math.floor(t / 60);
   var min = Math.floor(t % 60);
@@ -151,7 +159,7 @@ function Ticket() {
     movie.Plot?.length > mvedata.overview?.length
       ? movie.Plot
       : mvedata.overview;
-  var votes = num1 === 0 ? mvedata.vote_count : num1;
+  var votes = movie.imdbRating === "N/A" ? num2 : num1;
 
   return (
     <>
@@ -175,15 +183,15 @@ function Ticket() {
                     <button className="figcaptionbutton" onClick={toggleShow}>
                       <i
                         className="fa-brands fa-youtube"
-                        style={{ color: "#FF0000" }}
+                        style={{ color: "#FF0000", backgroundColor: "white" }}
                       ></i>
-                      &nbsp; Watch
+                      &nbsp; Watch Trailer
                     </button>
                   </div>
                   <div>
                     <button className="figcaptionbutton" onClick={toggleShow1}>
                       <i class="fa-solid fa-magnifying-glass"></i>
-                      &nbsp;Reviews
+                      &nbsp;&nbsp;Reviews
                     </button>
                   </div>
                 </div>
@@ -193,27 +201,30 @@ function Ticket() {
           <MDBModal tabIndex="-1" show={centredModal} setShow={setCentredModal}>
             <MDBModalDialog centered size="lg">
               <MDBModalContent>
-                <MDBModalHeader></MDBModalHeader>
+                <MDBModalHeader>
+                  <strong>{movie.Title}- Trailer</strong>
+                </MDBModalHeader>
                 <MDBModalBody>
                   {trailer !== null && (
                     <ul className="ulvideo">
-                      {trailer.filter(data => data.name.includes('Trailer')).map(data1 => ((
-                        <div className="videodata">
-                          <li>{data1.name}</li>
-                          <a
-                            target="_blank"
-                            href={`https://www.youtube.com/watch/${data1.key}`}
-                          >
-                            <button className="videodatabutton" >
-                              <i
-                                className="fa-brands fa-youtube"
-                                style={{ color: "#FF0000" }}
-                              ></i>
-                            </button>
-                          </a>
-                        </div>
-                      )))}
-                  
+                      {trailer
+                        .filter((data) => data.name.includes("Trailer"))
+                        .map((data1) => (
+                          <div className="videodata">
+                            <li>{data1.name}</li>
+                            <a
+                              target="_blank"
+                              href={`https://www.youtube.com/watch/${data1.key}`}
+                            >
+                              <button className="videodatabutton">
+                                <i
+                                  className="fa-brands fa-youtube"
+                                  style={{ color: "#FF0000" }}
+                                ></i>
+                              </button>
+                            </a>
+                          </div>
+                        ))}
                     </ul>
                   )}
                 </MDBModalBody>
@@ -232,11 +243,19 @@ function Ticket() {
           >
             <MDBModalDialog centered size="lg">
               <MDBModalContent>
-                <MDBModalHeader></MDBModalHeader>
+                <MDBModalHeader>
+                  <strong>{movie.Title}-Reviews</strong>
+                </MDBModalHeader>
                 <MDBModalBody>
                   {review?.length === 0 && (
-                    <div style={{ display: "flex", flexWrap: "wrap",justifyContent:"center" }}>
-                      <div style={{marginRight:"10px",marginTop:"5px"}}>
+                    <div
+                      style={{
+                        display: "flex",
+                        flexWrap: "wrap",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <div style={{ marginRight: "10px", marginTop: "5px" }}>
                         <i class="fa-solid fa-magnifying-glass fa-2x"></i>
                       </div>
 
@@ -336,7 +355,7 @@ function Ticket() {
               {theatres.map((data) => (
                 <button
                   type="button"
-                  name={data.name}
+                  name={data.cost}
                   id={activeb === data.name ? "datebuttonid" : "datebutton"}
                   onClick={() => theatreclick(data.name)}
                 >
@@ -345,18 +364,20 @@ function Ticket() {
               ))}
             </div>
             {activebutton && activeb && (
-              <div className="theatre">
+              <div className="theatre1">
                 <label>
-                  <strong>SelectCost </strong>
+                  <strong>Select Cost </strong>
                 </label>
                 {costs.map((data) => (
                   <button
                     type="button"
                     name={data.cost}
+                    value={data.value}
+                 
                     id={cost === data.cost ? "datebuttonid" : "datebutton"}
                     onClick={() => handlecost(data.cost)}
                   >
-                    {data.cost}
+                    {data.value}
                   </button>
                 ))}
               </div>
@@ -397,8 +418,8 @@ function Ticket() {
         <div className="cast">
           {credit &&
             credit.map((c) => (
-              <div>
-                <div className="carouselItem">
+              <div className="castimages">
+                <div>
                   <a
                     href={`https://en.wikipedia.org/wiki/${c?.name}`}
                     target="_blank"
@@ -416,7 +437,7 @@ function Ticket() {
                   </a>
                 </div>
                 <div>
-                  <p className="carouselItem__txt">{c?.name}</p>
+                  <p className="">{c?.name}</p>
                 </div>
               </div>
             ))}
