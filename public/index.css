@@ -277,7 +277,6 @@ a {
   flex-wrap: wrap;
 }
 
-
 /* Home Page */
 
 .latestmovies {
@@ -288,6 +287,7 @@ a {
   padding-top: 10%;
   padding-left: 100px;
   padding-right: 100px;
+  margin-bottom: 30px;
 }
 .latestmovies button {
   border: none;
@@ -386,12 +386,10 @@ figure figcaption button {
   font-size: 14px;
   cursor: pointer;
 }
-figure figcaption button:hover{
-  
-  text-transform:uppercase;
+figure figcaption button:hover {
+  text-transform: uppercase;
 }
-figure figcaption button i:hover{
-  
+figure figcaption button i:hover {
   size: 10%;
 }
 .movie-image {
@@ -413,15 +411,15 @@ figure figcaption button i:hover{
 /* Ticket */
 .figcaptionbutton {
   background-color: white;
-  color:black;
+  color: black;
   outline: 2px solid #1abc9c;
   padding: 5px;
-  height:auto;
+  height: auto;
   width: auto;
 }
-.figcaptionbutton:hover{
+.figcaptionbutton:hover {
   transform: scale(1.05);
-  text-transform:uppercase;
+  text-transform: uppercase;
 }
 .videodata {
   display: flex;
@@ -436,20 +434,22 @@ figure figcaption button i:hover{
   border: none;
   background-color: #fff;
 }
-.videodatabutton:hover{
+.videodatabutton:hover {
   transform: scale(1.05);
-  text-transform:uppercase;
+  text-transform: uppercase;
 }
 .videodata li:hover {
-  outline:0px;
+  outline: 0px;
   border: 0px;
 }
 .videodatabutton i:hover {
-  
   border: 0px;
 }
 .ulvideo :hover {
   border: 1px solid black;
+}
+.reviewdata{
+  outline:1px solid black;
 }
 .movie {
   background-size: cover;
@@ -567,6 +567,17 @@ li {
   color: black;
   margin: 15px 125px 15px 125px;
 }
+.plotdata {
+  line-height: 30px;
+  overflow: hidden;
+  white-space: pre-line;
+  border-right: 0.15 rem solid orange;
+ 
+  font-weight: 550;
+  margin-top: 15px;
+}
+
+
 
 @media only screen and (max-width: 850px) {
   .plot {
@@ -588,13 +599,13 @@ li {
   box-shadow: 4px 4px 0 rgb(248, 68, 100);
   transition: transform 0.2s, box-shadow 0.2s;
 }
-.ticket-button:active{
+.ticket-button:active {
   transform: translateX(4px) translateY(4px);
-  box-shadow: 0 0 0 rgb(248, 68, 100);;
+  box-shadow: 0 0 0 rgb(248, 68, 100);
 }
-.ticket-button:hover{
+.ticket-button:hover {
   transform: scale(1.05);
-  text-transform:uppercase;
+  text-transform: uppercase;
 }
 
 .date {
@@ -616,15 +627,15 @@ li {
   display: flex;
   flex-wrap: wrap;
 }
-.theatre1 button{
-  width:40px;
-  height:25px;
+.theatre1 button {
+  width: 40px;
+  height: 25px;
   overflow: hidden;
 }
-.theatre1 button:hover{
-  width:auto;
-  height:30px;
-  padding: 2.5px 5px;
+.theatre1 button:hover {
+  width: auto;
+  
+  padding: 0px 5px;
 }
 
 #datebutton {
@@ -643,7 +654,7 @@ li {
   border-radius: 5px;
   color: white;
   background-color: rgb(45, 196, 146);
-  outline: 1px solid red!important;
+  outline: 1px solid red !important;
 }
 
 .theatre button:hover {
@@ -658,23 +669,30 @@ li {
   display: inline-flex;
   flex-wrap: wrap;
 }
-
+.castimages {
+  margin-right: 20px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+.castimages:hover {
+  border-radius: 10px;
+  outline: 2px solid black;
+  text-decoration: underline;
+}
 .cast-img {
   border-radius: 10px;
-  margin-right: 20px;
+
   object-fit: cover;
   cursor: pointer;
   box-shadow: 0 0 8px 0px rgba(0, 0, 0, 0.2);
+  outline: 2px solid black;
 }
 
 .cast-img:hover {
-  transform: scale(1.02);
+  transform: scale(1.01);
   box-shadow: 0 0 8px 0px rgba(0, 0, 0, 0.2);
 }
 
-.castimages :hover{
-  text-decoration: underline;
-}
 /* Booking page */
 .booking {
   font-family: "Encode Sans SC", sans-serif;
@@ -760,12 +778,12 @@ li {
   margin: 5px;
   border-radius: 4px;
   border: 1px solid black;
-  display:inline-block;
+  display: inline-block;
   align-items: center;
   justify-content: center;
 }
-#seat{
-  color:white;
+#seat {
+  color: white;
 }
 .seat.selected {
   background-color: #1ea83c;
@@ -916,9 +934,9 @@ hr {
   border: none;
   border-radius: 10px;
 }
-.paycost-button:hover{
+.paycost-button:hover {
   transform: scale(1.05);
-  text-transform:uppercase;
+  text-transform: uppercase;
 }
 #payid {
   border: 1px solid black;
@@ -941,9 +959,9 @@ hr {
   font-size: medium;
   font-weight: 600;
 }
-.payconfirm-button:hover{
+.payconfirm-button:hover {
   transform: scale(1.05);
-  text-transform:uppercase;
+  text-transform: uppercase;
 }
 .gfg {
   display: flex;
@@ -960,9 +978,9 @@ hr {
 .gfg-details button {
   border: 0.5px;
 }
-.gfg-details button:hover{
+.gfg-details button:hover {
   transform: scale(1.05);
-  text-transform:uppercase;
+  text-transform: uppercase;
 }
 @media only screen and (max-width: 1000px) {
   .gfg-content img {
@@ -1002,7 +1020,7 @@ hr {
     display: grid;
     height: 900px;
     width: 400px;
-    margin: 50px auto;  
+    margin: 50px auto;
     font-family: "League Spartan", sans-serif;
     background: #ebf0f5;
 
@@ -1054,29 +1072,29 @@ hr {
   border: 1px solid black;
   border-radius: 10%;
 }
-.rating-star{
-   display: flex;
-   flex-wrap: wrap;
-   justify-content: center;
+.rating-star {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   margin: 10px auto;
 }
-.rating-star button{
-  border:0px;
+.rating-star button {
+  border: 0px;
   background-color: white;
 }
-#rating{
-  background-color:red;
+#rating {
+  background-color: red;
 }
-#color-rating i{
- background-color:#1abc9c;
+#color-rating i {
+  background-color: #1abc9c;
 }
 #feedback-button {
   margin: 20px auto;
   display: block;
 }
-#feedback-button :hover{
+#feedback-button :hover {
   transform: scale(1.05);
-  text-transform:uppercase;
+  text-transform: uppercase;
 }
 /* About page */
 
@@ -1098,9 +1116,9 @@ hr {
   border-radius: 5px;
   font-size: medium;
 }
-.about button :hover{
+.about button :hover {
   transform: scale(1.05);
-  text-transform:uppercase;
+  text-transform: uppercase;
 }
 .about-div {
   display: flex;
