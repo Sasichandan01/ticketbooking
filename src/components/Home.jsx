@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Tooltip } from "react-tooltip";
-
+import { CToast, CToastHeader, CToastBody } from "@coreui/react";
 import Movie from "./Movie";
-
 
 function Home() {
   const location = useLocation();
@@ -14,9 +13,10 @@ function Home() {
   const [movie, setMovie] = useState([]);
   const [found, setNotFound] = useState(null);
   const [datatip, settip] = useState(null);
+
   useEffect(() => {
     fetch(
-      ` https://api.themoviedb.org/3/discover/movie?api_key=bee8ce9f0d5a33ee50837d31a61a64eb&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_release_type=2|3&release_date.gte=2023-05-01T00:00:00.000Z&page=1`
+      ` https://api.themoviedb.org/3/discover/movie?api_key=bee8ce9f0d5a33ee50837d31a61a64eb&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&release_date.gte=2023-06-01T00:00:00.000Z&page=1`
     )
       .then((res) => res.json())
       .then((data) => setMovie(data.results))
@@ -25,7 +25,7 @@ function Home() {
         setNotFound(true);
       });
   }, []);
-
+  
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -50,12 +50,36 @@ function Home() {
     } else if (count === 1) {
       settip("Sort by Title");
     } else {
-      settip("Unsort");
+      settip("Sort by Popularity");
     }
   }
 
   return (
     <>
+    
+      <CToast
+        animation={true}
+        autohide={true}
+        visible={true}
+        placement="top-end"
+      >
+        <CToastHeader closeButton>
+          <svg
+            className="rounded me-2"
+            width="20"
+            height="20"
+            xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="xMidYMid slice"
+            focusable="false"
+            role="img"
+          >
+            <rect width="100%" height="100%" fill="#007aff"></rect>
+          </svg>
+          <div className="fw-bold me-auto">Hello, {name}</div>
+          <small></small>
+        </CToastHeader>
+        <CToastBody>Welcome to Flix Booking</CToastBody>
+      </CToast>
       <div className="latestmovies">
         <div>
           <h3>Latest Movies</h3>
@@ -82,7 +106,7 @@ function Home() {
               city={city}
               id={data.id}
               tmdata={data}
-              year="2023"
+              year={data.release_date}
               release={data.release_date}
               title={data.title}
               poster={data.poster_path}
